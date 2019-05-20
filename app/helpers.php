@@ -1,5 +1,26 @@
 <?php
 
+if (!function_exists('container')) {
+    function container()
+    {
+        return \App\Application::getContainerInstance();
+    }
+}
+if (!function_exists('app')) {
+    function app()
+    {
+        return \App\Application::getInstance();
+    }
+}
+
+if (!function_exists('config')) {
+    function config()
+    {
+        return container()->get('config');
+    }
+}
+
+
 if (!function_exists('loadEnvironmentFromFile')) {
     function loadEnvironmentFromFile($file)
     {

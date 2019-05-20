@@ -13,7 +13,6 @@
     ],
     "require": {
         "php": "~7.2.0",
-        "slim/slim": "^3.1",
         "fzaninotto/faker": "^1.8",
         "illuminate/config": "^5.7.0",
         "illuminate/database": "^5.7.0",
@@ -22,6 +21,8 @@
         "league/fractal": "^0.17.0",
         "monolog/monolog": "^1.24",
         "robmorgan/phinx": "^0.10.6",
+        "slim/slim": "^3.1",
+        "symfony/finder": "^4.2",
         "vlucas/phpdotenv": "^2.5"
     },
     "require-dev": {
