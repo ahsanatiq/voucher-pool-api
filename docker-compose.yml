@@ -1,0 +1,38 @@
+version: "3"
+services:
+
+    mysql:
+      build: docker/mysql
+      container_name: voucher-pool-mysql
+      volumes:
+        - ./data/mysql:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=newsletter2go
+        - MYSQL_DATABASE=newsletter2go
+        - MYSQL_USER=newsletter2go
+        - MYSQL_PASSWORD=newsletter2go
+        - TZ=UTC
+      ports:
+        - "8306:3306"
+
+    nginx:
+      build: docker/nginx
+      container_name: voucher-pool-nginx
+      volumes:
+        - .:/var/www
+        - ./logs/nginx:/var/log/nginx
+        - ./docker/nginx/sites:/etc/nginx/sites-available
+      ports:
+        - "8080:80"
+      depends_on:
+        - php-fpm          
+
+    php-fpm:
+      build: docker/php-fpm
+      container_name: voucher-pool-php-fpm
+      volumes:
+        - .:/var/www
+        - ./docker/php-fpm/php7.2.ini:/usr/local/etc/php/php.ini
+      ports:
+        - "8900:9000"        
+
