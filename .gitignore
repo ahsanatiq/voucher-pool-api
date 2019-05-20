@@ -1,0 +1,4 @@
+/vendor/
+/logs/*
+/data/mysql/*
+!/logs/README.md
