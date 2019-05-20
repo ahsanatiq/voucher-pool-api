@@ -8,12 +8,19 @@ actor: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://nginx
+            url: %APP_URL%
             headers:
                 APP_ENV: testing
         - \Helper\Acceptance
         - Asserts
         - REST:
             depends: PhpBrowser
-            url: http://nginx/
-            app_url: http://nginx
+            url: %APP_URL%
+        - Db:
+            dsn: '%DB_CONNECTION%:host=%DB_HOST%;dbname=%DB_NAME%'
+            user: '%DB_USER%'
+            password: '%DB_PASSWORD%'
+            dump: 'tests/_data/newsletter2go.sql'
+            cleanup: true # run populator before each test
+            populate: true # run populator before all test
+

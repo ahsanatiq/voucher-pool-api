@@ -61,3 +61,12 @@ if (!function_exists('parseCliArguments')) {
         return [$pname, $value];
     }
 }
+
+if(!function_exists('parseEnvFile')) {
+    function parseEnvFile($filePath) {
+        if(file_exists($filePath)) {
+            return (new Symfony\Component\Dotenv\Dotenv())->parse(file_get_contents($filePath), $filePath);
+        }
+        return [];
+    }
+}
