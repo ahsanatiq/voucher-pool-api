@@ -50,7 +50,7 @@
     </rule>
 
     <!-- Paths to check -->
-    <file>./src/</file>
+    <file>./app/</file>
     <file>./public/</file>
     <file>./tests/</file>
 
