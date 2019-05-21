@@ -28,17 +28,19 @@ RUN apt-get update && \
     libfreetype6-dev \
     libssl-dev \
     libmcrypt-dev \
-    mysql-client \
-    && rm -rf /var/lib/apt/lists/*
+    libgmp-dev \
+    mysql-client
 
+    # Install the PHP extensions
 RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mysqli \
-    # Install the PHP gd library
     && docker-php-ext-configure gd \
     --with-jpeg-dir=/usr/lib \
     --with-freetype-dir=/usr/include/freetype2 && \
-    docker-php-ext-install gd
- 
+    docker-php-ext-install gd && \
+    docker-php-ext-install bcmath && \
+    docker-php-ext-install gmp
+
 # Add a non-root user
 ARG PUID=1000
 ENV PUID ${PUID}
@@ -46,7 +48,7 @@ ARG PGID=1000
 ENV PGID ${PGID}
 ARG DOCKUSER=newsletter2go
 ENV DOCKUSER ${DOCKUSER}
-    
+
 RUN set -xe; \
     apt-get update -yqq && \
     pecl channel-update pecl.php.net && \
@@ -72,8 +74,8 @@ COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN sed -i "s/xdebug.remote_autostart=0/xdebug.remote_autostart=1/" /usr/local/etc/php/conf.d/xdebug.ini && \
     sed -i "s/xdebug.remote_enable=0/xdebug.remote_enable=1/" /usr/local/etc/php/conf.d/xdebug.ini && \
     sed -i "s/xdebug.cli_color=0/xdebug.cli_color=1/" /usr/local/etc/php/conf.d/xdebug.ini
-    
-# install opcache extension   
+
+# install opcache extension
 RUN docker-php-ext-install opcache
 COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
