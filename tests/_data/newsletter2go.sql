@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.26)
 # Database: newsletter2go
-# Generation Time: 2019-05-20 06:45:44 +0000
+# Generation Time: 2019-05-21 01:29:47 +0000
 # ************************************************************
 
 
@@ -18,6 +18,24 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table offers
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `offers`;
+
+CREATE TABLE `offers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) NOT NULL,
+  `discount` float NOT NULL DEFAULT '0',
+  `expiration_date` date DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table phinxlog
@@ -34,6 +52,17 @@ CREATE TABLE `phinxlog` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `phinxlog` WRITE;
+/*!40000 ALTER TABLE `phinxlog` DISABLE KEYS */;
+
+INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`)
+VALUES
+	(20190520052531,'databaseCreateRecipients','2019-05-20 22:53:02','2019-05-20 22:53:02',0),
+	(20190520052601,'databaseCreateOffers','2019-05-20 22:53:02','2019-05-20 22:53:02',0),
+	(20190520052618,'databaseCreateVouchers','2019-05-20 22:53:02','2019-05-20 22:53:03',0);
+
+/*!40000 ALTER TABLE `phinxlog` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table recipients
@@ -56,78 +85,60 @@ LOCK TABLES `recipients` WRITE;
 
 INSERT INTO `recipients` (`id`, `name`, `email`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-	(1,'Test User','test@test.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(2,'Skye Kautzer','lexie43@ortiz.biz','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(3,'Eileen Reichel','wcremin@heidenreich.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(4,'George Nienow','aileen.heaney@gmail.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(5,'Nova Ullrich II','letitia66@rosenbaum.net','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(6,'Conner Grant Jr.','susan05@gmail.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(7,'Tiara Haag','hauck.mikayla@hotmail.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(8,'Prof. Tre Hahn','rbogisich@yahoo.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(9,'Jeremie Koch I','cummings.kip@mayert.net','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(10,'Mrs. Ernestine Lind V','chad05@walter.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(11,'Luella Raynor','wgraham@yahoo.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(12,'Aditya Grady','lbednar@lehner.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(13,'Elnora Padberg DDS','emelie68@marvin.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(14,'Margarita Breitenberg','vthompson@yahoo.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(15,'Dr. Pete Franecki','irunolfsdottir@considine.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(16,'Marlene Zemlak','angus.rempel@rowe.org','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(17,'Prof. Hilbert Armstrong Jr.','ghyatt@cartwright.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(18,'Mr. Trevion Strosin V','eleazar.cormier@damore.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(19,'Dr. Raina Miller','ehermann@yahoo.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(20,'Dr. Maria Bernier V','sage94@gmail.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(21,'Jon Gottlieb','reinhold51@gleichner.biz','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(22,'Casimir Larkin','goodwin.mohammad@yahoo.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(23,'Mohammad Romaguera','rstiedemann@champlin.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(24,'Eugene Glover PhD','noel62@rath.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(25,'Ryder Langosh','wehner.broderick@maggio.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(26,'Edd Schmidt','stark.gerard@witting.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(27,'Prof. Keyon Lesch V','scarter@gmail.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(28,'Ms. Santina Becker','chet.walter@hermiston.biz','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(29,'Koby Herman','demetris32@white.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL),
-	(30,'Jovany Littel','watsica.velda@skiles.com','2019-05-20 06:43:41','2019-05-20 06:43:41',NULL);
+	(1,'Test User','test@test.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(2,'Natasha Howe','raquel12@morar.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(3,'Esperanza Hills','jesse25@gmail.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(4,'Prof. Erick Vandervort DDS','barton57@bartoletti.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(5,'Krystal Bauch','kyla.lueilwitz@mcdermott.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(6,'Stephany Nitzsche','weissnat.georgianna@rohan.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(7,'Alvera Pagac','sauer.marco@hoeger.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(8,'Nedra Borer','logan87@hackett.net','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(9,'Freddie Hoppe','andrew.paucek@hotmail.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(10,'Mr. Rocky Lindgren IV','mnolan@sipes.info','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(11,'Melany Koch','fabiola.sporer@hotmail.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(12,'Marcos Corkery','ohermiston@towne.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(13,'Estell Trantow','wlang@gmail.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(14,'Levi Boyer','florencio82@stamm.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(15,'Roma Greenfelder','esther.russel@gmail.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(16,'Rosario Steuber','torphy.filomena@mann.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(17,'Hudson Orn','winifred.hermiston@parisian.net','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(18,'Kade Schuppe II','cortez.bechtelar@hahn.info','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(19,'Josie Sauer','cary34@durgan.org','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(20,'Mrs. Kristin Jerde','koelpin.kaylee@murphy.net','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(21,'Abe Cremin','mathias23@oberbrunner.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(22,'Prof. Hilario Hodkiewicz Sr.','montana.konopelski@kunde.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(23,'Enoch Rice','boris.reynolds@daugherty.org','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(24,'Alaina Harvey','carley99@yahoo.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(25,'Karli Abbott','velma73@dach.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(26,'Candido Larson','jacobson.kenyon@brekke.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(27,'Myles O\'Connell','colin90@yahoo.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(28,'Dr. Sim Hickle II','kallie.yost@gaylord.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(29,'Adriel Bechtelar','carmelo.west@yahoo.com','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL),
+	(30,'Gilberto Beer','ivory.wiza@wyman.info','2019-05-21 00:15:53','2019-05-21 00:15:53',NULL);
 
 /*!40000 ALTER TABLE `recipients` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Dump of table special_offers
+# Dump of table vouchers
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `special_offers`;
+DROP TABLE IF EXISTS `vouchers`;
 
-CREATE TABLE `special_offers` (
+CREATE TABLE `vouchers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(250) NOT NULL,
-  `discount` float NOT NULL DEFAULT '0',
-  `expiration_date` date DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table voucher_codes
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `voucher_codes`;
-
-CREATE TABLE `voucher_codes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `special_offer_id` int(11) NOT NULL,
   `recipient_id` int(11) NOT NULL,
+  `offer_id` int(11) NOT NULL,
   `code` varchar(100) NOT NULL,
   `used_at` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `special_offer_id` (`special_offer_id`),
+  KEY `offer_id` (`offer_id`),
   KEY `recipient_id` (`recipient_id`),
-  CONSTRAINT `voucher_codes_ibfk_1` FOREIGN KEY (`special_offer_id`) REFERENCES `special_offers` (`id`),
-  CONSTRAINT `voucher_codes_ibfk_2` FOREIGN KEY (`recipient_id`) REFERENCES `recipients` (`id`)
+  CONSTRAINT `vouchers_ibfk_1` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`),
+  CONSTRAINT `vouchers_ibfk_2` FOREIGN KEY (`recipient_id`) REFERENCES `recipients` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

@@ -13,8 +13,6 @@ class ApplicationTest extends \Codeception\Test\Unit
 
     public function _before()
     {
-        // $this->app = \App\Application::getInstance();
-        // $this->container = $this->app->getContainer();
     }
 
     // tests
