@@ -35,22 +35,12 @@ class RecipientServiceTest extends \Codeception\Test\Unit
         );
     }
 
-    public function testGetZeroRecipientsAfterInitialization()
-    {
-        $recipients = $this->recipientService->getAll();
-        $this->assertCount(0, $recipients);
-    }
-
     public function testGetRecipient()
     {
         $user = ['name'=>$this->faker->name, 'email'=>$this->faker->email];
         $this->recipientRepository->create($user);
         $recipients = $this->recipientService->getAll();
-        $this->assertCount(1, $recipients);
-        $this->assertArrayHasKey('name', $recipients[0]);
-        $this->assertSame($recipients[0]['name'], $user['name']);
-        $this->assertArrayHasKey('email', $recipients[0]);
-        $this->assertSame($recipients[0]['email'], $user['email']);
+        $this->assertSame($user, array_intersect($user,$recipients[count($recipients)-1]));
     }
 
 
