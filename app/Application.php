@@ -27,6 +27,10 @@ class Application extends \Slim\App
         $this->registerMiddlewares();
         $this->registerRoutes();
         $this->registerRepositories();
+        $this->registerServices();
+        $this->registerTransformers();
+        $this->registerModels();
+        $this->registerControllers();
         self::$instance = $this;
     }
 
@@ -43,15 +47,6 @@ class Application extends \Slim\App
         }
         return new self;
     }
-
-    // public function run()
-    // {
-    //     try {
-    //         return parent::run(false);
-    //     } catch (\Exception $e) {
-    //         ExceptionHandler::handle($e);
-    //     }
-    // }
 
     private function loadConfig()
     {
@@ -107,10 +102,81 @@ class Application extends \Slim\App
 
     private function registerRepositories()
     {
-        // $this->container->bind(
-        //     \App\Repositories\Contracts\RecipeRepositoryInterface::class,
-        //     \App\Repositories\Eloquent\RecipeRepository::class
-        // );
+        $finder = (new Finder)->files()->in(__DIR__ . '/Repositories/Collection');
+        foreach ($finder as $file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+                $class = '\\App\\Repositories\\Collection\\'.$file->getBasename('.php').'';
+                return new $class($container);
+            };
+        }
+        $finder = (new Finder)->files()->in(__DIR__ . '/Repositories/Contracts');
+        foreach ($finder as $file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+                $class = '\\App\\Repositories\\Contracts\\'.$file->getBasename('.php').'';
+                return new $class($container);
+            };
+        }
+        $finder = (new Finder)->files()->in(__DIR__ . '/Repositories/Eloquent');
+        foreach ($finder as $file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+                $class = '\\App\\Repositories\\Eloquent\\'.$file->getBasename('.php').'';
+                return new $class($container);
+            };
+        }
+    }
+
+    private function registerServices()
+    {
+        $finder = (new Finder)->files()->in(__DIR__ . '/Services');
+        foreach ($finder as $file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+                $class = '\\App\\Services\\'.$file->getBasename('.php').'';
+                return new $class($container);
+            };
+        }
+        $finder = (new Finder)->files()->in(__DIR__ . '/Services/Validators');
+        foreach ($finder as $file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+                $class = '\\App\\Services\\Validators\\'.$file->getBasename('.php').'';
+                return new $class($container);
+            };
+        }
+    }
+
+    private function registerTransformers()
+    {
+        $finder = (new Finder)->files()->in(__DIR__ . '/Transformers');
+        foreach ($finder as $file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+                $class = '\\App\\Transformers\\'.$file->getBasename('.php').'';
+                return new $class;
+            };
+        }
+
+    }
+
+    private function registerModels()
+    {
+        $finder = (new Finder)->files()->in(__DIR__ . '/Models');
+        foreach ($finder as $file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+                $class = '\\App\\Models\\'.$file->getBasename('.php').'';
+                return new $class;
+            };
+        }
+
+    }
+
+    private function registerControllers()
+    {
+        $finder = (new Finder)->files()->in(__DIR__ . '/Controllers');
+        foreach ($finder as $file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+                $class = '\\App\\Controllers\\'.$file->getBasename('.php').'';
+                return new $class($container);
+            };
+        }
+
     }
 
     public function loadProperEnvironment()

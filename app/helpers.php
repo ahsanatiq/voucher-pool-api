@@ -1,9 +1,10 @@
 <?php
 
 if (!function_exists('container')) {
-    function container()
+    function container($package = null)
     {
-        return \App\Application::getContainerInstance();
+        $container =  \App\Application::getContainerInstance();
+        return ($package) ? $container->get($package) : $container;
     }
 }
 if (!function_exists('app')) {
@@ -14,9 +15,10 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('config')) {
-    function config()
+    function config($var = null)
     {
-        return container()->get('config');
+        $config = container()->get('config');
+        return ($var) ? $config->get($var) : $config;
     }
 }
 
