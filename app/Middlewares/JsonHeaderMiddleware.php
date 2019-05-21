@@ -1,12 +1,11 @@
 <?php
 namespace App\Middlewares;
 
-class HttpHeaderStartTimerMiddleware
+class JsonHeaderMiddleware
 {
     public function __invoke($request, $response, $next)
     {
-
-        $request = $request->withAttribute('startTime', microtime(true));
+        $request = $request->withHeader('accept', 'application/json');
         $response = $next($request, $response);
         return $response;
     }
