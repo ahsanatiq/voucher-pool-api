@@ -59,10 +59,12 @@ abstract class BaseValidator
             return trim($data);
         };
         $decimalFormat = function ($data) {
-            return number_format($data, 2, '.', '');
+            $result = filter_var($data, FILTER_VALIDATE_FLOAT, FILTER_NULL_ON_FAILURE);
+            return $result===null ? 'null' : number_format($result, 2, '.', '');
         };
         $dateFormat = function ($data) {
-            return date_create_from_format('Y-m-d', $data);
+            $result = date_create_from_format('Y-m-d', $data);
+            return $result===false ? 'null' : $result->format('Y-m-d');
         };
 
         $filters = [];
