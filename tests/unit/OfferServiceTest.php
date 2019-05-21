@@ -94,17 +94,10 @@ class OfferServiceTest extends \Codeception\Test\Unit
         $user = ['name'=>$this->faker->name, 'email'=>$this->faker->email];
         $user = $this->RecipientRepository->create($user);
 
-        $offer = ['name'=>'offer1', 'discount'=>'5', 'expiration_date'=>'2025-05-21'];
+        $offer = ['name'=>'offer1', 'discount'=>'5.00', 'expiration_date'=>'2025-05-21'];
         $this->OfferService->create($offer);
         $offers = $this->OfferService->getAll();
-        codecept_debug($offers);
         $this->assertSame($offer, array_intersect($offer, $offers[count($offers)-1]));
         $vouchers = $this->VoucherRepository->getAll();
-        codecept_debug($vouchers);
-        
     }
-
-
-
-
 }
