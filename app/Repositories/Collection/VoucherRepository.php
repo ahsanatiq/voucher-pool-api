@@ -1,30 +1,31 @@
 <?php
 namespace App\Repositories\Collection;
 
-use App\Repositories\Contracts\RecipientRepositoryInterface;
+use App\Repositories\Contracts\VoucherRepositoryInterface;
 use Illuminate\Support\Collection;
 
-class RecipientRepository implements RecipientRepositoryInterface
+class VoucherRepository implements VoucherRepositoryInterface
 {
-    public $recipients;
+    public $vouchers;
 
     public function __construct()
     {
-        $this->recipients = new Collection();
+        $this->vouchers = new Collection();
     }
 
     public function getAll()
     {
-        return $this->recipients->all();
+        return $this->vouchers->all();
     }
 
     public function create($data)
     {
-        $maxid = $this->recipients->max('id');
+        $maxid = $this->vouchers->max('id');
         $data['id'] = $maxid ? ++$maxid : 1;
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
-        $this->recipients->push($data);
+        $data['used_at'] = '';
+        $this->vouchers->push($data);
         return $data;
     }
 }

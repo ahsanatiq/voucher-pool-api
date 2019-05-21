@@ -1,30 +1,31 @@
 <?php
 namespace App\Repositories\Collection;
 
-use App\Repositories\Contracts\RecipientRepositoryInterface;
+use App\Repositories\Contracts\OfferRepositoryInterface;
 use Illuminate\Support\Collection;
 
-class RecipientRepository implements RecipientRepositoryInterface
+class OfferRepository implements OfferRepositoryInterface
 {
-    public $recipients;
+    public $offers;
 
     public function __construct()
     {
-        $this->recipients = new Collection();
+        $this->offers = new Collection();
     }
 
     public function getAll()
     {
-        return $this->recipients->all();
+
+        return $this->offers->all();
     }
 
     public function create($data)
     {
-        $maxid = $this->recipients->max('id');
+        $maxid = $this->offers->max('id');
         $data['id'] = $maxid ? ++$maxid : 1;
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
-        $this->recipients->push($data);
+        $this->offers->push($data);
         return $data;
     }
 }
