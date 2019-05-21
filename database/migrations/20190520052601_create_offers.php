@@ -5,11 +5,11 @@ namespace database;
 use Phinx\Util\Literal;
 use Phinx\Migration\AbstractMigration;
 
-class CreateSpecialOffers extends AbstractMigration
+class CreateOffers extends AbstractMigration
 {
     public function change()
     {
-        $table = $this->table('special_offers');
+        $table = $this->table('offers');
         $table
             ->addColumn('name', 'string', ['limit' => 250])
             ->addColumn('discount', 'float', ['null' => false, 'default' => '0'])
