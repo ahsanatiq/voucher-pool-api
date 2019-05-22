@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use Slim\Container;
+use App\Exceptions\ValidationException;
 
 class VoucherService extends BaseService
 {
@@ -29,7 +30,7 @@ class VoucherService extends BaseService
         if ($decoded && $decoded[0]==$recipient['id']) {
             return $decoded;
         }
-        throw new \Exception('Invalid code');
+        throw new ValidationException('Invalid code.');
     }
 
     public function saveCode($recipient, $offer, $code)
@@ -37,7 +38,7 @@ class VoucherService extends BaseService
         return $this->VoucherRepository->create([
             'recipient_id' => $recipient['id'],
             'offer_id' => $offer['id'],
-            'code' => $code,
+            'used_code' => $code,
         ]);
     }
 
@@ -45,9 +46,10 @@ class VoucherService extends BaseService
     {
         list($recipientId, $offerId) = $this->validate($code, $recipient);
         $offer = $this->OfferService->getById($offerId);
+        
         $usedOffersIds = $this->getAllUsedOffers($recipientId);
         if(in_array($offerId, $usedOffersIds)) {
-            throw new \Exception('Offer is already used');
+            throw new ValidationException('Offer is already used.');
         }
         $this->saveCode($recipient, $offer, $code);
         return $offer;

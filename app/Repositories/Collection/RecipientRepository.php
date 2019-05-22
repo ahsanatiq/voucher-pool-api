@@ -18,6 +18,11 @@ class RecipientRepository implements RecipientRepositoryInterface
         return $this->recipients->all();
     }
 
+    public function getByEmail($email)
+    {
+        return $this->recipients->where('email',$email)->first();
+    }
+
     public function create($data)
     {
         $maxid = $this->recipients->max('id');
@@ -26,10 +31,5 @@ class RecipientRepository implements RecipientRepositoryInterface
         $data['updated_at'] = date('Y-m-d H:i:s');
         $this->recipients->push($data);
         return $data;
-    }
-
-    public function getByEmail($email)
-    {
-        return $this->recipients->where('email',$email)->first();
     }
 }

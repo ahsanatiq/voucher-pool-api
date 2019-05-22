@@ -14,12 +14,12 @@ class VoucherRepository implements VoucherRepositoryInterface
 
     public function getAll()
     {
-        return $this->VoucherModel->orderBy('id', 'desc')->get();
+        return $this->VoucherModel->orderBy('id', 'desc')->get()->toArray();
     }
 
     public function getByRecipient($id)
     {
-        return $this->VoucherModel->where('recipient_id', $id)->get();
+        return $this->VoucherModel->where('recipient_id', $id)->get()->toArray();
     }
 
     public function create($data)

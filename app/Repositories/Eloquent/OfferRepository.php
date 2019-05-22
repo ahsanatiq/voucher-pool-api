@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Eloquent;
 
+use Carbon\Carbon;
 use App\Repositories\Contracts\OfferRepositoryInterface;
 
 class OfferRepository implements OfferRepositoryInterface
@@ -14,12 +15,18 @@ class OfferRepository implements OfferRepositoryInterface
 
     public function getAll()
     {
-        return $this->OfferModel->orderBy('id', 'desc')->get();
+        return $this->OfferModel->orderBy('id', 'desc')->get()->toArray();
+    }
+
+    public function getAllActive()
+    {
+        return $this->OfferModel->where('expire_at', '>=', Carbon::tomorrow())->get()->toArray();
     }
 
     public function getById($id)
     {
-        return $this->OfferModel->where('id', $id)->first();
+        $result = $this->OfferModel->where('id', $id)->first();
+        return $result ? $result->toArray() : array();
     }
 
     public function create($data)

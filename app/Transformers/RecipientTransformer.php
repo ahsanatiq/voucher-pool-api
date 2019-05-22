@@ -2,19 +2,19 @@
 
 namespace App\Transformers;
 
-use App\Models\RecipientModel;
+use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
 
 class RecipientTransformer extends TransformerAbstract
 {
-    public function transform(RecipientModel $recipient)
+    public function transform(array $recipient)
     {
         return [
-            'id'              => (int) $recipient->id,
-            'name'            => $recipient->name,
-            'email'           => $recipient->email,
-            'created_at'      => $recipient->created_at->format(\DateTime::ATOM),
-            'updated_at'      => $recipient->updated_at->format(\DateTime::ATOM),
+            'id'              => (int) $recipient['id'],
+            'name'            => $recipient['name'],
+            'email'           => $recipient['email'],
+            'created_at'      => Carbon::parse($recipient['created_at'])->toDateTimeString(),
+            'updated_at'      => Carbon::parse($recipient['updated_at'])->toDateTimeString(),
         ];
     }
 }

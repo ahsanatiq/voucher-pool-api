@@ -23,9 +23,14 @@ class RecipientService extends BaseService
         return $this->recipientRepository->getAll();
     }
 
+    public function getByEmail($email)
+    {
+        return $this->recipientRepository->getByEmail($email);
+    }
+
     public function getVouchers($recipientEmail)
     {
-        $recipient = $this->recipientRepository->getByEmail($recipientEmail);
+        $recipient = $this->getByEmail($recipientEmail);
         $offers = $this->OfferService->getAllActive();
         $usedOffersId = $this->VoucherService->getAllUsedOffers($recipient['id']);
         $offers = array_filter($offers, function($offer) use ($usedOffersId) {
