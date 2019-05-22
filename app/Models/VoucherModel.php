@@ -3,12 +3,21 @@ namespace App\Models;
 
 class VoucherModel extends BaseModel
 {
-    protected $table = 'vouchers';
+    protected $table = 'used_vouchers';
 
     protected $fillable = [
-        'code',
-        'used_at'
+        'used_code'
     ];
 
-    protected $dates = ['deleted_at', 'used_at'];
+    protected $dates = ['deleted_at'];
+
+    public function recipient()
+    {
+        $this->belongsTo(RecipientModel::class);
+    }
+
+    public function offer()
+    {
+        $this->belongsTo(OfferModel::class);
+    }
 }

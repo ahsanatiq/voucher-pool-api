@@ -17,6 +17,11 @@ class VoucherRepository implements VoucherRepositoryInterface
         return $this->VoucherModel->orderBy('id', 'desc')->get();
     }
 
+    public function getByRecipient($id)
+    {
+        return $this->VoucherModel->where('recipient_id', $id)->get();
+    }
+
     public function create($data)
     {
         return $this->VoucherModel->create($data);

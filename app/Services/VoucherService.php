@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use Slim\Container;
+use App\Repositories\Contracts\RecipientRepositoryInterface;
+use App\Repositories\Contracts\OfferRepositoryInterface;
 
 class VoucherService extends BaseService
 {
@@ -12,16 +14,19 @@ class VoucherService extends BaseService
         $this->VoucherRepository = $container->get('VoucherRepository');
     }
 
-    public function create($recipients, $offer)
+    public function getAllUsedOffers($recipientId)
     {
-        $vouchers = [];
-        foreach ($recipients as $recipient) {
-            $vouchers[] = $this->VoucherRepository->create([
-                'recipient_id' => $recipient['id'],
-                'offer_id' => $offer['id'],
-                'code' => strtoupper(substr(md5(rand()), 0, 8)),
-            ]);
-        }
-        return $vouchers;
+        $vouchers = $this->VoucherRepository->getByRecipient($recipientId);
+        return array_column($vouchers, 'offer_id');
     }
+
+    public function saveCode(RecipientRepositoryInterface $recipient, OfferRepositoryInterface $offer, $code)
+    {
+        return $this->VoucherRepository->create([
+            'recipient_id' => $recipient['id'],
+            'offer_id' => $offer['id'],
+            'code' => $code,
+        ]);
+    }
+
 }

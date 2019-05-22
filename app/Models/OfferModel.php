@@ -8,7 +8,7 @@ class OfferModel extends BaseModel
     protected $fillable = [
         'name',
         'discount',
-        'expiration_date'
+        'expire_at'
     ];
 
     protected $dates = ['deleted_at'];

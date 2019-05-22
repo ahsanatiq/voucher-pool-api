@@ -27,4 +27,9 @@ class RecipientRepository implements RecipientRepositoryInterface
         $this->recipients->push($data);
         return $data;
     }
+
+    public function getByEmail($email)
+    {
+        return $this->recipients->where('email',$email)->first();
+    }
 }

@@ -15,7 +15,12 @@ class VoucherRepository implements VoucherRepositoryInterface
 
     public function getAll()
     {
-        return $this->vouchers->all();
+        return $this->vouchers->toArray();
+    }
+
+    public function getByRecipient($id)
+    {
+        return $this->vouchers->where('recipient_id', $id)->toArray();
     }
 
     public function create($data)
@@ -24,7 +29,6 @@ class VoucherRepository implements VoucherRepositoryInterface
         $data['id'] = $maxid ? ++$maxid : 1;
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
-        $data['used_at'] = '';
         $this->vouchers->push($data);
         return $data;
     }
