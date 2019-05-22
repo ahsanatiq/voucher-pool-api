@@ -72,22 +72,22 @@ Development environment requirements:
 Setting up your development environment on your local machine using setup script **(For MAC/LINUX)**:
 
 ```bash
-$ git clone https://github.com/ahsanatiq/voucher-pool-api.git
-$ cd voucher-pool-api
-$ ./setup.sh
+git clone https://github.com/ahsanatiq/voucher-pool-api.git
+cd voucher-pool-api
+./setup.sh
 ```
 
 Manual setup **(For Windows)**:
 
 ```bash
-$ git clone https://github.com/ahsanatiq/voucher-pool-api.git
-$ cd voucher-pool-api
-$ cp .env.dev .env
-$ docker-compose up -d
-$ docker exec -it voucher-pool-php-fpm composer install
-$ docker exec -it voucher-pool-mysql mysql -u root -pnewsletter2go -e "create database newsletter2go_testing; GRANT ALL PRIVILEGES ON *.* TO 'newsletter2go'@'%' IDENTIFIED BY 'newsletter2go';";
-$ docker exec -it voucher-pool-php-fpm php vendor/bin/phinx migrate
-$ docker exec -it voucher-pool-php-fpm php vendor/bin/phinx seed:run
+git clone https://github.com/ahsanatiq/voucher-pool-api.git
+cd voucher-pool-api
+cp .env.dev .env
+docker-compose up -d
+docker exec -it voucher-pool-php-fpm composer install
+docker exec -it voucher-pool-mysql mysql -u root -pnewsletter2go -e "create database newsletter2go_testing; GRANT ALL PRIVILEGES ON *.* TO 'newsletter2go'@'%' IDENTIFIED BY 'newsletter2go';";
+docker exec -it voucher-pool-php-fpm php vendor/bin/phinx migrate
+docker exec -it voucher-pool-php-fpm php vendor/bin/phinx seed:run
 ```
 
 Now you can access the application via http://localhost:8080.
@@ -97,7 +97,7 @@ Now you can access the application via http://localhost:8080.
 Run the unit-tests & acceptance-tests in the PHP-FPM service container:
 
 ```bash
-$ docker exec -it voucher-pool-php-fpm php vendor/bin/codecept run --steps
+docker exec -it voucher-pool-php-fpm php vendor/bin/codecept run --steps
 ```
 
 ### API documentation
