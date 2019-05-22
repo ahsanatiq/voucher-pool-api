@@ -16,6 +16,7 @@ class CreateRecipients extends AbstractMigration
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => Literal::from('now()')])
             ->addColumn('updated_at', 'datetime', ['null' => false, 'default' => Literal::from('now()')])
             ->addColumn('deleted_at', 'datetime', ['null' => true])
+            ->addIndex(['email'], ['unique'=>true,'name' => 'idx_email'])
             ->create();
     }
 }

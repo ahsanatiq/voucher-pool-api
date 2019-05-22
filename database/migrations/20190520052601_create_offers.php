@@ -11,9 +11,9 @@ class CreateOffers extends AbstractMigration
     {
         $table = $this->table('offers');
         $table
-            ->addColumn('name', 'string', ['limit' => 250])
-            ->addColumn('discount', 'float', ['null' => false, 'default' => '0'])
-            ->addColumn('expiration_date', 'date', ['null' => true])
+            ->addColumn('name', 'string', ['limit' => 100])
+            ->addColumn('discount', 'float', ['null' => false, 'default' => '0.00'])
+            ->addColumn('expire_at', 'date', ['null' => false])
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => Literal::from('now()')])
             ->addColumn('updated_at', 'datetime', ['null' => false, 'default' => Literal::from('now()')])
             ->addColumn('deleted_at', 'datetime', ['null' => true])
