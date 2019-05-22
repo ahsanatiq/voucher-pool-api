@@ -2,6 +2,7 @@
 namespace App\Services\Validators;
 
 use Slim\Container;
+use App\Exceptions\ValidationException;
 
 abstract class BaseValidator
 {
@@ -21,6 +22,10 @@ abstract class BaseValidator
 
     public function validate($data, $rules = [], $custom_errors = [])
     {
+        if(!$data) {
+            throw new ValidationException('Params required.');
+        }
+
         if (empty($rules) && !empty($this->rules) && is_array($this->rules)) {
             //no rules passed to function, use the default rules defined in sub-class
             $rules = $this->rules;
@@ -40,7 +45,7 @@ abstract class BaseValidator
         $validation = $this->validator->make($data, $rules, $custom_errors);
 
         if ($validation->fails()) {
-            throw new \Exception($validation->messages());
+            throw new ValidationException($validation->messages());
         }
 
         return true;
