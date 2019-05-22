@@ -35,43 +35,43 @@ class OfferServiceTest extends \Codeception\Test\Unit
 
     public function testValidationAllRequiredForCreateOffer()
     {
-        $this->expectExceptionMessage('{"name":["The name field is required."],"discount":["The discount field is required."],"expire_at":["The expire at field is required."]}');
+        $this->expectExceptionMessage('Params required.');
         $this->OfferService->create([]);
     }
 
     public function testValidationDiscountRequiredForCreateOffer()
     {
-        $this->expectExceptionMessage('{"discount":["The discount field is required."],"expire_at":["The expire at field is required."]}');
+        $this->expectExceptionMessage('The discount field is required.');
         $this->OfferService->create(['name'=>'offer1']);
     }
 
     public function testValidationDateRequiredForCreateOffer()
     {
-        $this->expectExceptionMessage('{"expire_at":["The expire at field is required."]}');
+        $this->expectExceptionMessage('The expire at field is required.');
         $this->OfferService->create(['name'=>'offer1', 'discount'=>'5']);
     }
 
     public function testValidationDiscountShouldBeNumericForCreateOffer()
     {
-        $this->expectExceptionMessage('{"discount":["The discount must be a number."]}');
+        $this->expectExceptionMessage('The discount must be a number.');
         $this->OfferService->create(['name'=>'offer1', 'discount'=>'abc', 'expire_at'=>'2020-05-21']);
     }
 
     public function testValidationDateFormatForCreateOffer()
     {
-        $this->expectExceptionMessage('{"expire_at":["The expire at is not a valid date.","The expire at must be a date after today."]}');
+        $this->expectExceptionMessage('The expire at is not a valid date.');
         $this->OfferService->create(['name'=>'offer1', 'discount'=>'0', 'expire_at'=>'20gghjh200202x0202']);
     }
 
     public function testValidationDiscountMaxForCreateOffer()
     {
-        $this->expectExceptionMessage('{"discount":["The discount must be between 0 and 100."]}');
+        $this->expectExceptionMessage('The discount must be between 0 and 100.');
         $this->OfferService->create(['name'=>'offer1', 'discount'=>'101', 'expire_at'=>'2020-05-05']);
     }
 
     public function testValidationDateShouldBeFutureForCreateOffer()
     {
-        $this->expectExceptionMessage('{"expire_at":["The expire at must be a date after today."]}');
+        $this->expectExceptionMessage('The expire at must be a date after today');
         $this->OfferService->create(['name'=>'offer1', 'discount'=>'5', 'expire_at'=>'2019-05-21']);
     }
 

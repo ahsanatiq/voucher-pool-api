@@ -1,6 +1,5 @@
 <?php
-
-loadEnvironmentFromFile(codecept_root_dir('.env.testing'));
+$_SERVER['HTTP_APP_ENV'] = 'testing';
 require codecept_root_dir('bootstrap/app.php');
 
 unset(container()['RecipientRepository']);

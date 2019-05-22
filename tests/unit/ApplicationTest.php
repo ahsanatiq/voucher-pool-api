@@ -101,9 +101,9 @@ class ApplicationTest extends \Codeception\Test\Unit
         $envTesting = parseEnvFile(codecept_root_dir('.env.testing'));
 
         // test Current settings
-        app()->loadProperEnvironment();
-        $GLOBALS['argv'] = '';
+        $GLOBALS['argv'] = [];
         $_SERVER['HTTP_APP_ENV'] = '';
+        app()->loadProperEnvironment();
         foreach($envCurrent as $key => $var) {
             $this->assertSame(getenv($key),$var);
         }
