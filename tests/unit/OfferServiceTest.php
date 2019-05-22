@@ -14,28 +14,14 @@ class OfferServiceTest extends \Codeception\Test\Unit
     public $faker;
 
     public static function setUpBeforeClass() : void {
-        unset(container()['OfferRepository']);
-        container()['OfferRepository'] = function ($container) {
-            return new \App\Repositories\Collection\OfferRepository();
-        };
-        unset(container()['RecipientRepository']);
-        container()['RecipientRepository'] = function ($container) {
-            return new \App\Repositories\Collection\RecipientRepository();
-        };
-        unset(container()['VoucherRepository']);
-        container()['VoucherRepository'] = function ($container) {
-            return new \App\Repositories\Collection\VoucherRepository();
-        };
-
+    //
     }
 
     protected function _before()
     {
         $this->faker = Factory::create();
-        $this->OfferRepository = container()->get('OfferRepository');
-        $this->RecipientRepository = container()->get('RecipientRepository');
-        $this->VoucherRepository = container()->get('VoucherRepository');
-        $this->OfferService = container()->get('OfferService');
+        $this->OfferRepository = container('OfferRepository');
+        $this->OfferService = container('OfferService');
     }
 
     // tests
@@ -49,55 +35,69 @@ class OfferServiceTest extends \Codeception\Test\Unit
 
     public function testValidationAllRequiredForCreateOffer()
     {
-        $this->expectExceptionMessage('{"name":["The name field is required."],"discount":["The discount field is required."],"expiration_date":["The expiration date field is required."]}');
+        $this->expectExceptionMessage('{"name":["The name field is required."],"discount":["The discount field is required."],"expire_at":["The expire at field is required."]}');
         $this->OfferService->create([]);
     }
 
     public function testValidationDiscountRequiredForCreateOffer()
     {
-        $this->expectExceptionMessage('{"discount":["The discount field is required."],"expiration_date":["The expiration date field is required."]}');
+        $this->expectExceptionMessage('{"discount":["The discount field is required."],"expire_at":["The expire at field is required."]}');
         $this->OfferService->create(['name'=>'offer1']);
     }
 
     public function testValidationDateRequiredForCreateOffer()
     {
-        $this->expectExceptionMessage('{"expiration_date":["The expiration date field is required."]}');
+        $this->expectExceptionMessage('{"expire_at":["The expire at field is required."]}');
         $this->OfferService->create(['name'=>'offer1', 'discount'=>'5']);
     }
 
     public function testValidationDiscountShouldBeNumericForCreateOffer()
     {
         $this->expectExceptionMessage('{"discount":["The discount must be a number."]}');
-        $this->OfferService->create(['name'=>'offer1', 'discount'=>'abc', 'expiration_date'=>'2020-05-21']);
+        $this->OfferService->create(['name'=>'offer1', 'discount'=>'abc', 'expire_at'=>'2020-05-21']);
     }
 
     public function testValidationDateFormatForCreateOffer()
     {
-        $this->expectExceptionMessage('{"expiration_date":["The expiration date is not a valid date.","The expiration date must be a date after today."]}');
-        $this->OfferService->create(['name'=>'offer1', 'discount'=>'0', 'expiration_date'=>'20gghjh200202x0202']);
+        $this->expectExceptionMessage('{"expire_at":["The expire at is not a valid date.","The expire at must be a date after today."]}');
+        $this->OfferService->create(['name'=>'offer1', 'discount'=>'0', 'expire_at'=>'20gghjh200202x0202']);
     }
 
     public function testValidationDiscountMaxForCreateOffer()
     {
         $this->expectExceptionMessage('{"discount":["The discount must be between 0 and 100."]}');
-        $this->OfferService->create(['name'=>'offer1', 'discount'=>'101', 'expiration_date'=>'2020-05-05']);
+        $this->OfferService->create(['name'=>'offer1', 'discount'=>'101', 'expire_at'=>'2020-05-05']);
     }
 
     public function testValidationDateShouldBeFutureForCreateOffer()
     {
-        $this->expectExceptionMessage('{"expiration_date":["The expiration date must be a date after today."]}');
-        $this->OfferService->create(['name'=>'offer1', 'discount'=>'5', 'expiration_date'=>'2019-05-21']);
+        $this->expectExceptionMessage('{"expire_at":["The expire at must be a date after today."]}');
+        $this->OfferService->create(['name'=>'offer1', 'discount'=>'5', 'expire_at'=>'2019-05-21']);
     }
 
     public function testValidCreateOffer()
     {
-        $user = ['name'=>$this->faker->name, 'email'=>$this->faker->email];
-        $user = $this->RecipientRepository->create($user);
+        $offer = ['name'=>'offer1', 'discount'=>'5.00', 'expire_at'=>'2025-05-21'];
+        $result = $this->OfferService->create($offer);
 
-        $offer = ['name'=>'offer1', 'discount'=>'5.00', 'expiration_date'=>'2025-05-21'];
-        $this->OfferService->create($offer);
         $offers = $this->OfferService->getAll();
         $this->assertSame($offer, array_intersect($offer, $offers[count($offers)-1]));
-        $vouchers = $this->VoucherRepository->getAll();
+    }
+
+    public function testGetAllActiveOffers()
+    {
+        // it service won't let me add offers whose expiring today or past
+        // so adding these offers manually using repository
+        $offer = ['name'=>'offer1', 'discount'=>'5.00', 'expire_at'=>'1947-05-21'];
+        $this->OfferRepository->create($offer);
+
+        $offer = ['name'=>'offer2', 'discount'=>'10.00', 'expire_at' => date('Y-m-d')];
+        $this->OfferRepository->create($offer);
+
+        $offer = ['name'=>'offer3', 'discount'=>'15.00', 'expire_at' => date('Y-m-d', strtotime('tomorrow'))];
+        $this->OfferService->create($offer);
+
+        $offers = $this->OfferService->getAllActive();
+        $this->assertNotFalse(array_search('offer3', array_column($offers, 'name')), '"offer3" is not found in array');
     }
 }
