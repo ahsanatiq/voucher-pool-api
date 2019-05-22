@@ -11,7 +11,7 @@ abstract class BaseController
     public function toFractalResponse($data, $transformer)
     {
         $fractal = new Manager();
-        if ($data instanceof LaravelCollection) {
+        if ($data instanceof LaravelCollection || (is_array($data) && count($data) !== count($data, COUNT_RECURSIVE)) ) {
             $resource = new Collection($data, $transformer);
         } else {
             $resource = new Item($data, $transformer);
