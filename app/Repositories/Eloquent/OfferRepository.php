@@ -17,6 +17,11 @@ class OfferRepository implements OfferRepositoryInterface
         return $this->OfferModel->orderBy('id', 'desc')->get();
     }
 
+    public function getById($id)
+    {
+        return $this->OfferModel->where('id', $id)->first();
+    }
+
     public function create($data)
     {
         return $this->OfferModel->create($data);

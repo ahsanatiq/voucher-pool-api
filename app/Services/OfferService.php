@@ -24,6 +24,11 @@ class OfferService extends BaseService
         return $this->offerRepository->getAllActive();
     }
 
+    public function getById($id)
+    {
+        return $this->offerRepository->getById($id);
+    }
+
     public function create($data)
     {
         $data = $this->offerValidator->sanitize($data);

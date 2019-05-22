@@ -24,6 +24,11 @@ class OfferRepository implements OfferRepositoryInterface
         return $this->offers->where('expire_at_carbon', '>=', Carbon::tomorrow())->toArray();
     }
 
+    public function getById($id)
+    {
+        return $this->offers->where('id', $id)->first();
+    }
+
     public function create($data)
     {
         $maxid = $this->offers->max('id');
