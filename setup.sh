@@ -19,8 +19,8 @@ docker exec -it voucher-pool-mysql mysql -u root -pnewsletter2go -e "create data
 printf "\n"
 echo "migrating & seeding the required databases..."
 printf "\n"
-$ docker exec -it voucher-pool-php-fpm php vendor/bin/phinx migrate
-$ docker exec -it voucher-pool-php-fpm php vendor/bin/phinx seed:run
+docker exec -it voucher-pool-php-fpm php vendor/bin/phinx migrate
+docker exec -it voucher-pool-php-fpm php vendor/bin/phinx seed:run
 printf "\n"
 echo "done..."
 printf "\n"
