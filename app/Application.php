@@ -31,6 +31,7 @@ class Application extends \Slim\App
         $this->registerTransformers();
         $this->registerModels();
         $this->registerControllers();
+        $this->registerDatabase();
         self::$instance = $this;
     }
 
@@ -177,6 +178,11 @@ class Application extends \Slim\App
             };
         }
 
+    }
+
+    private function registerDatabase()
+    {
+        $this->db = self::$container['eloquent'];
     }
 
     public function loadProperEnvironment()
