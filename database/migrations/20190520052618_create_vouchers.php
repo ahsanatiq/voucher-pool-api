@@ -13,7 +13,7 @@ class CreateVouchers extends AbstractMigration
         $table
             ->addColumn('recipient_id', 'integer')
             ->addColumn('offer_id', 'integer')
-            ->addColumn('used_code', 'char', ['limit' => 7])
+            ->addColumn('used_code', 'char', ['limit' => 8])
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => Literal::from('now()')])
             ->addColumn('updated_at', 'datetime', ['null' => false, 'default' => Literal::from('now()')])
             ->addColumn('deleted_at', 'datetime', ['null' => true])

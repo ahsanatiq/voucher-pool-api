@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.26)
 # Database: newsletter2go
-# Generation Time: 2019-05-21 23:18:00 +0000
+# Generation Time: 2019-05-22 04:13:15 +0000
 # ************************************************************
 
 
@@ -57,9 +57,9 @@ LOCK TABLES `phinxlog` WRITE;
 
 INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`)
 VALUES
-	(20190520052531,'databaseCreateRecipients','2019-05-21 23:08:37','2019-05-21 23:08:37',0),
-	(20190520052601,'databaseCreateOffers','2019-05-21 23:14:26','2019-05-21 23:14:26',0),
-	(20190520052618,'databaseCreateVouchers','2019-05-21 23:14:26','2019-05-21 23:14:26',0);
+	(20190520052531,'databaseCreateRecipients','2019-05-22 04:12:39','2019-05-22 04:12:39',0),
+	(20190520052601,'databaseCreateOffers','2019-05-22 04:12:39','2019-05-22 04:12:39',0),
+	(20190520052618,'databaseCreateVouchers','2019-05-22 04:12:39','2019-05-22 04:12:40',0);
 
 /*!40000 ALTER TABLE `phinxlog` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -86,36 +86,36 @@ LOCK TABLES `recipients` WRITE;
 
 INSERT INTO `recipients` (`id`, `name`, `email`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-	(1,'Test User','test@test.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(2,'Anissa Gerhold','rebekah44@altenwerth.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(3,'Dr. Antonietta Durgan','quitzon.george@gmail.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(4,'Mr. Greg Koss','awilkinson@jenkins.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(5,'Francis Strosin MD','jaron.west@hotmail.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(6,'Abigail Murray','fkris@romaguera.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(7,'Candida Boyer','gemmerich@yahoo.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(8,'Bernhard Ernser Jr.','dwitting@hotmail.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(9,'Pamela Goodwin','stoltenberg.giovani@von.org','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(10,'Alek Spencer','fbailey@purdy.biz','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(11,'Theodore Lynch','grant.joe@yost.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(12,'Jerel Boyer','icarroll@jones.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(13,'Dusty West','vabshire@bruen.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(14,'Rodrick Bruen','orlando27@bergstrom.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(15,'Carlie Greenholt','ronny04@hotmail.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(16,'Leila Little','adella25@gmail.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(17,'Bryce Durgan','keeling.carter@gaylord.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(18,'Jayme Mohr DVM','kathlyn.schiller@gulgowski.info','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(19,'Dr. Jennings Collier IV','keenan.king@wisozk.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(20,'Betty Tillman','vidal59@gmail.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(21,'Owen Rempel','aniyah.luettgen@willms.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(22,'Bruce Harvey','ari62@bauch.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(23,'Joelle Roob','liam.keebler@harvey.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(24,'Loren Moore III','larson.javonte@yahoo.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(25,'Prof. Jayden Davis','estella14@emmerich.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(26,'Dr. Murray Nienow MD','broderick.moen@feeney.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(27,'Julian Raynor DVM','sturner@hilpert.com','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(28,'Shawna Sipes DVM','malvina74@bailey.info','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(29,'Mattie Braun IV','devan.nolan@damore.net','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL),
-	(30,'Maurine Huels','yvette.volkman@okeefe.net','2019-05-21 23:15:15','2019-05-21 23:15:15',NULL);
+	(1,'Test User','test@test.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(2,'Ryder Stokes','paris.okuneva@koelpin.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(3,'Manuela Brown','shemar.lynch@murphy.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(4,'Prof. Eli Mante','huel.michele@gmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(5,'Mrs. Thelma Wolff','stone39@hotmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(6,'Dr. Anthony Kunze Sr.','wiegand.ashly@hotmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(7,'Effie Kilback II','rskiles@gmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(8,'Kiana Feeney','rowan.feil@gmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(9,'Zelma Blanda DDS','keagan.mckenzie@mclaughlin.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(10,'Prof. Jerry Senger','stracke.mckayla@ankunding.biz','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(11,'Dr. Lina Haag','hollis.bahringer@hotmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(12,'Maud Greenholt','alycia.zemlak@gmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(13,'Mrs. Elsa Batz','kay.wisozk@hotmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(14,'Dr. Micah Koepp','armstrong.rhoda@yahoo.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(15,'Miss Elta Smith','nettie33@hodkiewicz.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(16,'Deangelo Stoltenberg','amara.buckridge@hotmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(17,'Cesar Green','oral19@gmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(18,'Elton Wolf DDS','waelchi.claud@braun.info','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(19,'Christelle Raynor','oran15@yahoo.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(20,'Dr. Gabriella Kuvalis','lindgren.mina@hotmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(21,'Althea Dickinson','layne00@yahoo.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(22,'Dr. Austin Reinger DVM','mwunsch@shields.info','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(23,'Friedrich Kautzer Jr.','dannie.bednar@stracke.info','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(24,'Lonie Fisher DVM','ghoppe@yahoo.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(25,'Griffin Jakubowski','beryl94@skiles.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(26,'Elza O\'Conner','eddie29@hotmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(27,'Grayce Lebsack PhD','lklein@bosco.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(28,'Addie Leannon','king.tabitha@jerde.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(29,'Dr. Alda Wisoky','glenda.schamberger@gmail.com','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL),
+	(30,'Lela Russel','schmidt.diego@sanford.info','2019-05-22 04:12:46','2019-05-22 04:12:46',NULL);
 
 /*!40000 ALTER TABLE `recipients` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -130,7 +130,7 @@ CREATE TABLE `used_vouchers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `recipient_id` int(11) NOT NULL,
   `offer_id` int(11) NOT NULL,
-  `used_code` char(7) NOT NULL,
+  `used_code` char(8) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL,
