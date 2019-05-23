@@ -21,7 +21,7 @@ class VoucherService extends BaseService
     public function getAllUsedOffers($recipientId)
     {
         $this->usedVouchers = $this->VoucherRepository->getByRecipient($recipientId);
-        return array_column($this->usedVouchers, 'offer_id');
+        return $this->usedVouchers->pluck('offer_id');
     }
 
     public function validate($code, $recipient)
@@ -46,9 +46,10 @@ class VoucherService extends BaseService
     {
         list($recipientId, $offerId) = $this->validate($code, $recipient);
         $offer = $this->OfferService->getById($offerId);
-        
+
         $usedOffersIds = $this->getAllUsedOffers($recipientId);
-        if(in_array($offerId, $usedOffersIds)) {
+        
+        if($usedOffersIds && $usedOffersIds->contains($offerId)) {
             throw new ValidationException('Offer is already used.');
         }
         $this->saveCode($recipient, $offer, $code);

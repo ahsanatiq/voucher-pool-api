@@ -15,13 +15,11 @@ class RecipientRepository implements RecipientRepositoryInterface
 
     public function getAll()
     {
-        return $this->recipientModel->orderBy('id', 'desc')->get()->toArray();
+        return $this->recipientModel->orderBy('id', 'desc')->get();
     }
 
     public function getByEmail($email)
     {
-        $result = $this->recipientModel->where('email', $email)->first();
-        return $result ? $result->toArray() : array();
-
+        return $this->recipientModel->where('email', $email)->first();
     }
 }

@@ -7,7 +7,7 @@ use League\Fractal\TransformerAbstract;
 
 class RecipientTransformer extends TransformerAbstract
 {
-    public function transform(array $recipient)
+    public function transform($recipient)
     {
         return [
             'id'              => (int) $recipient['id'],

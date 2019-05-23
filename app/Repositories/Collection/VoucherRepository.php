@@ -15,12 +15,17 @@ class VoucherRepository implements VoucherRepositoryInterface
 
     public function getAll()
     {
-        return $this->vouchers->toArray();
+        return $this->vouchers->all();
+    }
+
+    public function getById($id)
+    {
+        return $this->vouchers->where('id', $id)->first();
     }
 
     public function getByRecipient($id)
     {
-        return $this->vouchers->where('recipient_id', $id)->toArray();
+        return $this->vouchers->where('recipient_id', $id);
     }
 
     public function create($data)
@@ -30,6 +35,6 @@ class VoucherRepository implements VoucherRepositoryInterface
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
         $this->vouchers->push($data);
-        return $data;
+        return $this->getById($data['id']);
     }
 }
