@@ -3,7 +3,7 @@
 A simple api service application to consume vouchers from the pool. This is for demo purposes and created to demonstrate architectural & programming skills.
 
 
-##### Overview:
+### Overview:
 
 - **Nginx Container:** This service will act as an API gateway and it will route all the calls to the appropriate services ie PHP-FPM.
 - **PHP-FPM Container:** This service will serve all the voucher related API endpoints.
@@ -49,9 +49,13 @@ To validate your application's incoming HTTP request data, We've used [Illuminat
 
 To provide a standard & consistent output of API response data, we've used [League Fractal](https://github.com/league/fractal), so we can have presentation and transformation layer for our output data. All the transformation classes are stored in the `app/Transformers` directory.
 
-##### Unit Testing:
+##### HashIds for Voucher Generation:
 
-To test our application service, we've used [Codeception](https://github.com/codeception/codeception), Out of the box it allows us to have all three types of tests i-e unit, functional, and acceptance tests in a unified framework. In our case, we have unit tested the core business object `\App\Services`, also written acceptance tests to check the integration & functionality of all the API's. All the test case, are stored in the `tests` directory. and can be run by the following command:
+When a new special offer is created, we are not generating vouchers for all the recipients in our system. Instead we are using [HashIds](https://github.com/ivanakimov/hashids.php) to generate & validate vouchers for every recipient. We can encode & decode by using a combination of `[{recipient_id}, {offer_id}]`. It always produces a voucher code of exact 8 characters which can also be updated in the `config/hashids.php`
+
+##### Testing:
+
+To test our application service, we've used [Codeception](https://github.com/codeception/codeception), Out of the box it allows us to have all three types of tests i-e unit, functional, and acceptance tests in a unified framework. In our case, we have unit tested the core business objects in `\App\Services`, also written acceptance tests to check the integration & functionality of all the API endpoints. All the test cases, are stored in the `tests` directory. and can be run by the following command:
 
 `$ php vendor/bin/codecept run --steps`
 
