@@ -98,6 +98,6 @@ class OfferServiceTest extends \Codeception\Test\Unit
         $this->OfferService->create($offer);
 
         $offers = $this->OfferService->getAllActive();
-        $this->assertNotFalse(array_search('offer3', array_column($offers, 'name')), '"offer3" is not found in array');
+        $this->assertNotFalse($offers->pluck('name')->contains('offer3'), '"offer3" is not found in array');
     }
 }

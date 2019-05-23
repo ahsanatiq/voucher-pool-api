@@ -48,8 +48,8 @@ class RecipientServiceTest extends \Codeception\Test\Unit
 
         $vouchers = $this->recipientService->getVouchers($user['email']);
         $this->assertNotEmpty($vouchers);
-        $vouchers = array_values($vouchers);
-        $offer123 = array_search('offer123', array_column($vouchers, 'offer'));
+        $vouchers = $vouchers->values();
+        $offer123 = $vouchers->pluck('offer')->search('offer123');
         $this->assertNotFalse($offer123, '"offer123" is not found in array');
         $offer123 = $vouchers[$offer123];
 
