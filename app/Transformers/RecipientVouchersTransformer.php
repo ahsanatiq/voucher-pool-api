@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class RecipientVouchersTransformer extends TransformerAbstract
 {
-    public function transform(array $data)
+    public function transform($data)
     {
         return [
             'offer' => $data['offer'],

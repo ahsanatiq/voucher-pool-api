@@ -46,8 +46,8 @@ class VoucherServiceTest extends \Codeception\Test\Unit
     {
         list($user, $offer, $vouchers) = $this->createVouchers();
 
-        $vouchers = array_values($vouchers);
-        $offer50 = array_search($offer['name'], array_column($vouchers, 'offer'));
+        $vouchers = $vouchers->values();
+        $offer50 = $vouchers->pluck('offer')->search($offer['name']);
         $this->assertNotFalse($offer50, '"'.$offer['name'].'" is not found in array');
         list('offer'=>$offerName, 'code'=>$voucherCode) = $vouchers[$offer50];
 

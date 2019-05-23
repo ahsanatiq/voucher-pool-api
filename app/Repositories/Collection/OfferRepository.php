@@ -16,12 +16,12 @@ class OfferRepository implements OfferRepositoryInterface
 
     public function getAll()
     {
-        return $this->offers->toArray();
+        return $this->offers->all();
     }
 
     public function getAllActive()
     {
-        return $this->offers->where('expire_at_carbon', '>=', Carbon::tomorrow())->toArray();
+        return $this->offers->where('expire_at_carbon', '>=', Carbon::tomorrow());
     }
 
     public function getById($id)
@@ -37,6 +37,6 @@ class OfferRepository implements OfferRepositoryInterface
         $data['created_at'] = Carbon::now()->toDateString();
         $data['updated_at'] = Carbon::now()->toDateString();
         $this->offers->push($data);
-        return $data;
+        return $this->getById($data['id']);
     }
 }

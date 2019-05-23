@@ -15,18 +15,17 @@ class OfferRepository implements OfferRepositoryInterface
 
     public function getAll()
     {
-        return $this->OfferModel->orderBy('id', 'desc')->get()->toArray();
+        return $this->OfferModel->orderBy('id', 'desc')->get();
     }
 
     public function getAllActive()
     {
-        return $this->OfferModel->where('expire_at', '>=', Carbon::tomorrow())->get()->toArray();
+        return $this->OfferModel->where('expire_at', '>=', Carbon::tomorrow())->get();
     }
 
     public function getById($id)
     {
-        $result = $this->OfferModel->where('id', $id)->first();
-        return $result ? $result->toArray() : array();
+        return$this->OfferModel->where('id', $id)->first();
     }
 
     public function create($data)

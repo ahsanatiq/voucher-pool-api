@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class RedeemTransformer extends TransformerAbstract
 {
-    public function transform(array $data)
+    public function transform($data)
     {
         return [
             'discount' => (float)$data['discount'],

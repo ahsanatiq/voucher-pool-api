@@ -22,6 +22,11 @@ class RecipientRepository implements RecipientRepositoryInterface
     {
         return $this->recipients->where('email',$email)->first();
     }
+    
+    public function getById($id)
+    {
+        return $this->recipients->where('id',$id)->first();
+    }
 
     public function create($data)
     {
@@ -30,6 +35,6 @@ class RecipientRepository implements RecipientRepositoryInterface
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
         $this->recipients->push($data);
-        return $data;
+        return $this->getById($data['id']);
     }
 }
