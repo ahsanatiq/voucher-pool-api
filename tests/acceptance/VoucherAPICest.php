@@ -128,7 +128,7 @@ class VoucherAPICest
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson([
-            'type'    => 'ValidationException',
+            'type'    => 'UsedVoucherCodeException',
             'message' => 'Offer is already used.',
             'code'    => HttpCode::UNPROCESSABLE_ENTITY,
         ]);
