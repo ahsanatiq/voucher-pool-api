@@ -96,12 +96,12 @@ class VoucherAPICest
         ]);
 
         $I->sendPOST('/api/v1/redeem', ['email'=>'aadfad@f2asdfasdf', 'code'=>'jlakdfl']);
-        $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
+        $I->seeResponseCodeIs(HttpCode::NOT_FOUND);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson([
-            'type'    => 'ValidationException',
-            'message' => ['Invalid code.'],
-            'code'    => HttpCode::UNPROCESSABLE_ENTITY,
+            'type'    => 'RecipientNotFoundException',
+            'message' => ['Recipient not found.'],
+            'code'    => HttpCode::NOT_FOUND,
         ]);
 
         // get users
