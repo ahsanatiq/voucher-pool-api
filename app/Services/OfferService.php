@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use Slim\Container;
+use App\Exceptions\OfferNotFoundException;
 
 class OfferService extends BaseService
 {
@@ -26,7 +27,11 @@ class OfferService extends BaseService
 
     public function getById($id)
     {
-        return $this->offerRepository->getById($id);
+        $offer = $this->offerRepository->getById($id);
+        if ($offer) {
+            return $offer;
+        }
+        throw new OfferNotFoundException;
     }
 
     public function create($data)

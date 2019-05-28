@@ -25,7 +25,7 @@ class OfferRepository implements OfferRepositoryInterface
 
     public function getById($id)
     {
-        return$this->OfferModel->where('id', $id)->first();
+        return $this->OfferModel->where('id', $id)->first();
     }
 
     public function create($data)

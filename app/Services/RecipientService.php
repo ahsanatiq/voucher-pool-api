@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use Slim\Container;
+use App\Exceptions\RecipientNotFoundException;
 
 class RecipientService extends BaseService
 {
@@ -25,7 +26,11 @@ class RecipientService extends BaseService
 
     public function getByEmail($email)
     {
-        return $this->recipientRepository->getByEmail($email);
+        $recipient = $this->recipientRepository->getByEmail($email);
+        if ($recipient) {
+            return $recipient;
+        }
+        throw new RecipientNotFoundException;
     }
 
     public function getVouchers($recipientEmail)

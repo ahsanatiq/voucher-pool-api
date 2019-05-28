@@ -5,7 +5,8 @@ namespace App\Exceptions;
 use App\Exceptions\UnexpectedException;
 use App\Exceptions\ValidationException;
 use App\Exceptions\NotFoundHttpException;
-use App\Exceptions\RecipeNotFoundException;
+use App\Exceptions\OfferNotFoundException;
+use App\Exceptions\RecipientNotFoundException;
 use App\Exceptions\MethodNotAllowedHttpException;
 
 class ExceptionHandler
@@ -24,7 +25,10 @@ class ExceptionHandler
             case $e instanceof ValidationException:
                 $data = $e->getData();
                 break;
-            case $e instanceof RecipeNotFoundException:
+            case $e instanceof RecipientNotFoundException:
+                $data = $e->getData();
+                break;
+            case $e instanceof OfferNotFoundException:
                 $data = $e->getData();
                 break;
             case $e instanceof UnauthorizedException:
