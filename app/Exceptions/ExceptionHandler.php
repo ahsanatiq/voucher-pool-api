@@ -31,6 +31,12 @@ class ExceptionHandler
             case $e instanceof OfferNotFoundException:
                 $data = $e->getData();
                 break;
+             case $e instanceof InvalidVoucherCodeException:
+                $data = $e->getData();
+                break;
+            case $e instanceof UsedVoucherCodeException:
+                $data = $e->getData();
+                break;                
             case $e instanceof UnauthorizedException:
                 $data = $e->getData();
                 $loggerLevel = 'info';
