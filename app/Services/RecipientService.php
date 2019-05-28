@@ -39,12 +39,12 @@ class RecipientService extends BaseService
         $offers = $this->OfferService->getAllActive();
         $usedOffersId = $this->VoucherService->getAllUsedOffers($recipient['id']);
 
-        if($usedOffersId) {
-            $offers = $offers->filter(function($offer) use ($usedOffersId) {
+        if ($usedOffersId) {
+            $offers = $offers->filter(function ($offer) use ($usedOffersId) {
                 return !$usedOffersId->contains($offer['id']);
             });
         }
-        return $offers->map(function($offer) use ($recipient) {
+        return $offers->map(function ($offer) use ($recipient) {
             return ['offer'=>$offer['name'], 'code' => $this->hashids->encode([$recipient['id'], $offer['id']])];
         });
     }

@@ -38,6 +38,5 @@ class RecipientController extends BaseController
             $this->recipientVouchersTransformer
         );
         return $response->withJson($data);
-
     }
 }

@@ -20,12 +20,12 @@ class RecipientRepository implements RecipientRepositoryInterface
 
     public function getByEmail($email)
     {
-        return $this->recipients->where('email',$email)->first();
+        return $this->recipients->where('email', $email)->first();
     }
-    
+
     public function getById($id)
     {
-        return $this->recipients->where('id',$id)->first();
+        return $this->recipients->where('id', $id)->first();
     }
 
     public function create($data)

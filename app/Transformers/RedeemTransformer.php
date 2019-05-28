@@ -9,7 +9,7 @@ class RedeemTransformer extends TransformerAbstract
     public function transform($data)
     {
         return [
-            'discount' => (float)$data['discount'],
+            'discount' => (float) $data['discount'],
         ];
     }
 }

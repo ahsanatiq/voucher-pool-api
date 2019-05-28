@@ -79,23 +79,20 @@ class ApplicationTest extends \Codeception\Test\Unit
 
         foreach ($finder as $file) {
             $configVars = require($file->getRealPath());
-            foreach($configVars as $key=>$var) {
+            foreach ($configVars as $key => $var) {
                 // test Illuminite/Config way
-                $this->assertSame(config()->get( $file->getBasename('.php').'.'.$key ), $var);
+                $this->assertSame(config()->get($file->getBasename('.php').'.'.$key), $var);
                 // test Slim/Container settings way
-                if( $file->getBasename('.php') == 'app' ) {
-                    $this->assertSame($settings[$key], $var);
-                } else {
-                    $this->assertSame($settings[$file->getBasename('.php')][$key], $var);
-                }
-
+                ($file->getBasename('.php') == 'app') ?
+                $this->assertSame($settings[$key], $var) :
+                $this->assertSame($settings[$file->getBasename('.php')][$key], $var);
             }
         }
     }
 
     public function testEnvironmentLoadingInApplication()
     {
-        $envFile = file_exists( codecept_root_dir('.env') ) ? codecept_root_dir('.env') : codecept_root_dir('.env.dev');
+        $envFile = file_exists(codecept_root_dir('.env')) ? codecept_root_dir('.env') : codecept_root_dir('.env.dev');
         $envCurrent = parseEnvFile($envFile);
         $envDev = parseEnvFile(codecept_root_dir('.env.dev'));
         $envTesting = parseEnvFile(codecept_root_dir('.env.testing'));
@@ -104,8 +101,8 @@ class ApplicationTest extends \Codeception\Test\Unit
         $GLOBALS['argv'] = [];
         $_SERVER['HTTP_APP_ENV'] = '';
         app()->loadProperEnvironment();
-        foreach($envCurrent as $key => $var) {
-            $this->assertSame(getenv($key),$var);
+        foreach ($envCurrent as $key => $var) {
+            $this->assertSame(getenv($key), $var);
         }
 
         // test HTTP Header
@@ -158,6 +155,4 @@ class ApplicationTest extends \Codeception\Test\Unit
             $this->assertTrue(container()->has($file->getBasename('.php')));
         }
     }
-
-
 }

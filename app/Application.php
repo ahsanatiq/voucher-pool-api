@@ -1,7 +1,6 @@
 <?php
 namespace App;
 
-use App\Exceptions\ExceptionHandler;
 use Illuminate\Config\Repository as ConfigRepository;
 use Symfony\Component\Finder\Finder;
 
@@ -42,8 +41,7 @@ class Application extends \Slim\App
 
     public static function getInstance()
     {
-        if(self::$instance)
-        {
+        if (self::$instance) {
             return self::$instance;
         }
         return new self;
@@ -61,8 +59,8 @@ class Application extends \Slim\App
         $this->config = new ConfigRepository();
         $this->config->set($configItems);
         $this->settings = $configItems['app']??[];
-        foreach($configItems as $key => $config) {
-            if($key!='app') {
+        foreach ($configItems as $key => $config) {
+            if ($key!='app') {
                 $this->settings[$key] = $config;
             }
         }
@@ -77,7 +75,7 @@ class Application extends \Slim\App
     {
         $finder = (new Finder)->files()->in(__DIR__ . '/../dependencies/');
         foreach ($finder as $file) {
-            self::$container[$file->getBasename('.php')] = function($container) use ($file) {
+            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
                 return require($file->getRealPath());
             };
         }
@@ -148,24 +146,22 @@ class Application extends \Slim\App
     {
         $finder = (new Finder)->files()->in(__DIR__ . '/Transformers');
         foreach ($finder as $file) {
-            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+            self::$container[$file->getBasename('.php')] = function () use ($file) {
                 $class = '\\App\\Transformers\\'.$file->getBasename('.php').'';
                 return new $class;
             };
         }
-
     }
 
     private function registerModels()
     {
         $finder = (new Finder)->files()->in(__DIR__ . '/Models');
         foreach ($finder as $file) {
-            self::$container[$file->getBasename('.php')] = function ($container) use ($file) {
+            self::$container[$file->getBasename('.php')] = function () use ($file) {
                 $class = '\\App\\Models\\'.$file->getBasename('.php').'';
                 return new $class;
             };
         }
-
     }
 
     private function registerControllers()
@@ -177,7 +173,6 @@ class Application extends \Slim\App
                 return new $class($container);
             };
         }
-
     }
 
     private function registerDatabase()

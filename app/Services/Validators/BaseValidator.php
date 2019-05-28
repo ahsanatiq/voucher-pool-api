@@ -22,7 +22,7 @@ abstract class BaseValidator
 
     public function validate($data, $rules = [], $custom_errors = [])
     {
-        if(!$data) {
+        if (!$data) {
             throw new ValidationException('Params required.');
         }
 

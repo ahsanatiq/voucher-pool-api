@@ -25,12 +25,12 @@ class VoucherAPICest
     }
 
     // tests
-    public function TestRecipients(AcceptanceTester $I)
+    public function testRecipients(AcceptanceTester $I)
     {
         $users = $this->getRecipients($I);
     }
 
-    public function TestValidationForCreateOffer(AcceptanceTester $I)
+    public function testValidationForCreateOffer(AcceptanceTester $I)
     {
         $offerData  = $this->generateOfferData();
         $validations = $this->getValidations();
@@ -46,12 +46,12 @@ class VoucherAPICest
         }
     }
 
-    public function TestValidCreateOffer(AcceptanceTester $I)
+    public function testValidCreateOffer(AcceptanceTester $I)
     {
         $this->createOffer($I);
     }
 
-    public function TestGetVouchers(AcceptanceTester $I)
+    public function testGetVouchers(AcceptanceTester $I)
     {
         // get users
         $users = $this->getRecipients($I);
@@ -65,7 +65,7 @@ class VoucherAPICest
         $I->assertNotFalse($foundOffer, 'I could not get back offer code');
     }
 
-    public function TestRedeemVouchers(AcceptanceTester $I)
+    public function testRedeemVouchers(AcceptanceTester $I)
     {
         // test validations on radeem
         $I->sendPOST('/api/v1/redeem');
@@ -132,7 +132,6 @@ class VoucherAPICest
             'message' => 'Offer is already used.',
             'code'    => HttpCode::UNPROCESSABLE_ENTITY,
         ]);
-
     }
 
     protected function getVouchers(AcceptanceTester $I, $email)
@@ -172,7 +171,7 @@ class VoucherAPICest
         return [
             'name'      => $this->faker->word(),
             'discount'  => $this->faker->randomFloat(2, 0, 50),
-            'expire_at' => date('Y-m-d',strtotime('tomorrow')),
+            'expire_at' => date('Y-m-d', strtotime('tomorrow')),
         ];
     }
 

@@ -49,17 +49,16 @@ class VoucherService extends BaseService
         list($recipientId, $offerId) = $this->validate($code, $recipient);
         try {
             $offer = $this->OfferService->getById($offerId);
-        } catch(OfferNotFoundException $e) {
+        } catch (OfferNotFoundException $e) {
             throw new InvalidVoucherCodeException;
         }
 
         $usedOffersIds = $this->getAllUsedOffers($recipientId);
-        if($usedOffersIds && $usedOffersIds->contains($offerId)) {
+        if ($usedOffersIds && $usedOffersIds->contains($offerId)) {
             throw new UsedVoucherCodeException;
         }
 
         $this->saveCode($recipient, $offer, $code);
         return $offer;
     }
-
 }

@@ -1,4 +1,6 @@
 <?php
+namespace Tests;
+
 use Faker\Factory;
 
 class RecipientServiceTest extends \Codeception\Test\Unit
@@ -12,7 +14,8 @@ class RecipientServiceTest extends \Codeception\Test\Unit
     public $OfferService;
     public $faker;
 
-    public static function setUpBeforeClass() : void {
+    public static function setUpBeforeClass() : void
+    {
     //
     }
 
@@ -38,7 +41,7 @@ class RecipientServiceTest extends \Codeception\Test\Unit
         $user = ['name'=>$this->faker->name, 'email'=>$this->faker->email];
         $this->recipientRepository->create($user);
         $recipients = $this->recipientService->getAll();
-        $this->assertSame($user, array_intersect($user,$recipients[count($recipients)-1]));
+        $this->assertSame($user, array_intersect($user, $recipients[count($recipients)-1]));
     }
 
     public function testGetVouchers()

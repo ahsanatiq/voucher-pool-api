@@ -19,7 +19,7 @@ class CreateVouchers extends AbstractMigration
             ->addColumn('deleted_at', 'datetime', ['null' => true])
             ->addForeignKey('offer_id', 'offers', 'id')
             ->addForeignKey('recipient_id', 'recipients', 'id')
-            ->addIndex(['used_code'],['name'=>'idx_used_code'])
+            ->addIndex(['used_code'], ['name'=>'idx_used_code'])
             ->create();
     }
 }

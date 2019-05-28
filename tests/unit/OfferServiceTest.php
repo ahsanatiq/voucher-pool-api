@@ -1,4 +1,6 @@
 <?php
+namespace Tests;
+
 use Faker\Factory;
 
 class OfferServiceTest extends \Codeception\Test\Unit
@@ -13,7 +15,8 @@ class OfferServiceTest extends \Codeception\Test\Unit
     public $VoucherRepository;
     public $faker;
 
-    public static function setUpBeforeClass() : void {
+    public static function setUpBeforeClass() : void
+    {
     //
     }
 

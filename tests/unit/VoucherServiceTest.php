@@ -1,4 +1,5 @@
 <?php
+namespace Tests;
 
 use Faker\Factory;
 
@@ -63,8 +64,12 @@ class VoucherServiceTest extends \Codeception\Test\Unit
     public function createVouchers()
     {
         $user = $this->recipientRepository->create(['name'=>$this->faker->name, 'email'=>$this->faker->email]);
-        $discount = $this->faker->numberBetween(1,100);
-        $offer = $this->OfferService->create(['name'=>'offer '.$discount.' percent', 'discount'=>$discount, 'expire_at'=>'2020-05-21']);
+        $discount = $this->faker->numberBetween(1, 100);
+        $offer = $this->OfferService->create([
+            'name'=>'offer '.$discount.' percent',
+            'discount'=>$discount,
+            'expire_at'=>'2020-05-21'
+        ]);
         $vouchers = $this->recipientService->getVouchers($user['email']);
         $this->assertNotEmpty($vouchers);
 
